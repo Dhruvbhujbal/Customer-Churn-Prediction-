@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Churn Dashboard | Black Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h2><i class="fa-solid fa-bolt"></i> Telco Analytics Workspace</h2>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="info-panel card">
+            <h3><i class="fa-solid fa-circle-info"></i> About This Dashboard</h3>
+            <p>Welcome to the Customer Retention Engine. This tool allows account managers to predict the likelihood of a customer canceling their service in real-time.</p>
+            
+            <h4><i class="fa-solid fa-brain"></i> How it Works</h4>
+            <p>This system is powered by a <strong>Random Forest Machine Learning Algorithm</strong> trained on thousands of historical customer records. It analyzes billing habits, contract types, and service usage to identify hidden flight risks.</p>
+            
+            <h4><i class="fa-solid fa-bullseye"></i> Instructions</h4>
+            <p>1. Enter the customer's current details into the portal.<br>
+               2. Click "Run Prediction Engine".<br>
+               3. If the risk is high, route the customer to the retention team immediately.</p>
+        </div>
+
+        <div class="form-panel card">
+            <h3><i class="fa-solid fa-user-shield"></i> Customer Assessment Portal</h3>
+            <form id="churn-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fa-regular fa-calendar-days"></i> Tenure (Months):</label>
+                        <input type="number" id="tenure" value="12" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-indian-rupee-sign"></i> Monthly Charges:</label>
+                        <input type="number" id="monthly_charges" value="5800" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-file-contract"></i> Contract Type:</label>
+                    <select id="contract">
+                        <option value="Month-to-month">Month-to-month</option>
+                        <option value="One year">One year</option>
+                        <option value="Two year">Two year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-wifi"></i> Internet Service:</label>
+                    <select id="internet_service">
+                        <option value="Fiber optic">Fiber optic</option>
+                        <option value="DSL">DSL</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-regular fa-credit-card"></i> Payment Method:</label>
+                    <select id="payment_method">
+                        <option value="Electronic check">Electronic check</option>
+                        <option value="Mailed check">Mailed check</option>
+                        <option value="Bank transfer (automatic)">Bank transfer</option>
+                        <option value="Credit card (automatic)">Credit card</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submit-btn" class="predict-btn">
+                    <span id="btn-text">Run Prediction Engine</span>
+                    <i id="btn-spinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
+                </button>
+            </form>
+
+            <div id="result-box" class="hidden">
+                <h2 id="result-title"></h2>
+                
+                <div class="gauge-container">
+                    <div class="gauge-background">
+                        <div id="gauge-fill" class="gauge-fill"></div>
+                    </div>
+                    <span id="gauge-text" class="gauge-text">0%</span>
+                </div>
+
+                <p id="result-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
